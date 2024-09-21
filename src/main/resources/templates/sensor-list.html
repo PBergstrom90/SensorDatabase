@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sensors</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+</head>
+<body>
+
+<!-- Navigationsmeny -->
+<div class="navbar">
+    <a href="/sensors">Mätningar</a>
+    <div class="dropdown">
+        <button class="dropbtn">Team
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="#">Edvin</a>
+            <a href="#">Jesper</a>
+            <a href="#">Pontus</a>
+        </div>
+    </div>
+</div>
+
+<h1>Sensor List</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="sensor : ${sensors}">
+        <td th:text="${sensor.id}"></td>
+        <td th:text="${sensor.name}"></td>
+        <td>
+            <a th:href="@{/sensors/{id}/datapoints(id=${sensor.id})}" class="button-like">View Datapoints</a> |
+            <a th:href="@{/sensors/delete/{id}(id=${sensor.id})}" class="button-like">Delete</a>
+        </td>
+    </tr>
+</table>
+
+<a th:href="@{/sensors/add}" class="button-like">Add New Sensor</a>
+
+</body>
+</html>

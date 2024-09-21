@@ -1,0 +1,135 @@
+/* Global Dark Mode Styling */
+body {
+    background-color: #121212; /* Mörk bakgrund */
+    color: #FFD700; /* Gul text */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header and Navigation Menu */
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #FFD700;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+    color: #FFF;
+}
+
+.navbar .dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.navbar .dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    color: #FFD700;
+    background-color: inherit;
+    padding: 14px 20px;
+}
+
+.navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.navbar .dropdown-content a {
+    float: none;
+    color: #FFD700;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.navbar .dropdown-content a:hover {
+    background-color: #575757;
+}
+
+.navbar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Header styles */
+h1 {
+    color: #FFD700;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    background-color: #1E1E1E;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #444;
+    text-align: left;
+}
+
+table th {
+    background-color: #333;
+    color: #FFD700;
+}
+
+table tr:nth-child(even) {
+    background-color: #2D2D2D;
+}
+
+table tr:hover {
+    background-color: #575757;
+}
+
+/* Länkar i gult */
+a {
+    color: #FFD700; /* Gul text för länkar */
+    text-decoration: none; /* Ta bort understrykning */
+}
+
+a:hover {
+    color: #FFF; /* Vit text när musen är över länken */
+}
+
+/* Knapp-liknande länkar */
+button, a.button-like {
+    background-color: #333;
+    color: #FFD700;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+button:hover, a.button-like:hover {
+    background-color: #575757;
+    color: #FFF;
+}
+
+/* Anpassad knappform */
+button, a.button-like {
+    border-radius: 4px; /* Gör knapparna rundade */
+}

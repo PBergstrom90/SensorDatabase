@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Sensor</title>
+</head>
+<body>
+<h1>Add Sensor</h1>
+<form th:action="@{/sensors/add}" th:object="${sensor}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" />
+    <button type="submit">Add Sensor</button>
+</form>
+</body>
+</html>
