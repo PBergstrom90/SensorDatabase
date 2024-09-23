@@ -7,8 +7,7 @@ import com.example.sensordatabase.service.SensorService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/sensors")
@@ -22,12 +21,16 @@ public class SensorController {
         this.sensorService = sensorService;
     }
 
+    // Uppdaterad metod för att initiera sensorer och hantera om den redan finns
     public Sensor initializeSensor(String sensorName) {
-        if (!sensorRepository.findByName(sensorName).isPresent()) {
-            Sensor sensor = new Sensor(sensorName);
-            return sensorRepository.save(sensor);
+        // Kolla om sensorn redan finns genom att använda findByName
+        Optional<Sensor> existingSensor = sensorRepository.findByName(sensorName);
+        if (existingSensor.isPresent()) {
+            return existingSensor.get(); // Returnera den befintliga sensorn
+        } else {
+            Sensor sensor = new Sensor(sensorName); // Skapa ny sensor
+            return sensorRepository.save(sensor);  // Spara sensorn i databasen
         }
-        return sensorRepository.findByName(sensorName).get();
     }
 
     @GetMapping
@@ -41,8 +44,8 @@ public class SensorController {
     }
 
     public Sensor getSensor(Long sensorId) {
-        return sensorRepository.findById(sensorId).orElseThrow(()
-                -> new IllegalArgumentException("Sensor not found"));
+        return sensorRepository.findById(sensorId).orElseThrow(() ->
+                new IllegalArgumentException("Sensor not found"));
     }
 
     @GetMapping("/{sensorId}/datapoints")
