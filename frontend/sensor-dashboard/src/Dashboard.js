@@ -43,7 +43,12 @@ const Dashboard = () => {
 
     // Förbereda data för graf med datum (dag och månad) på x-axeln
     const chartData = {
-        labels: sensorData.map(dp => new Date(dp.timestamp).toLocaleDateString()), // Datum för x-axel
+        labels: sensorData.map(dp => {
+            const date = new Date(dp.timestamp);
+            const formattedDate = date.toLocaleDateString('sv-SE'); // Get local Swedish time.
+            const formattedTime = date.toLocaleTimeString('sv-SE', {hour12: false}); // Get time in 24 hour format.
+            return `${formattedDate} ${formattedTime}`; // Combine date and time for the x-axis label
+        }),
         datasets: [
             {
                 label: 'Temperature',
