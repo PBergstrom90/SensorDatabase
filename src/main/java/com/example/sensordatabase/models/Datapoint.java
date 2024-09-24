@@ -17,8 +17,7 @@ public class Datapoint {
     @GeneratedValue
     private Long id;
 
-    // Ändra kolumnnamnet till "value" för att matcha databasen
-    @Column(name = "value")
+    @Column(name = "temperature")
     private Double value;
 
     @Column
