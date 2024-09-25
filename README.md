@@ -47,7 +47,17 @@ The application uses **jSerialComm** to manage serial communication, with robust
 
 2. **Configure the database**:
 - Set up a MySQL (or other) database.
-- Update the application.properties file with the database URL, username, and password.
+- Run the following SQL-script:
+  ```sql 
+   drop database if exists tempdatabase;
+   create database tempdatabase;
+   use tempdatabase;
+   drop user if exists 'dbuser'@'localhost';
+   CREATE USER 'dbuser'@'localhost' IDENTIFIED BY 'secretpassword';
+   grant all privileges on . TO 'dbuser'@'localhost' WITH GRANT OPTION;
+   FLUSH PRIVILEGES;
+
+- Update the application.properties file with the database URL, username, and password (Or leave it as default).
 
 3. **Run the application**:
 - Run the Main class `SensorDatabaseApplication.java`.
