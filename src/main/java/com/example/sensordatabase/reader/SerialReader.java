@@ -1,7 +1,6 @@
 package com.example.sensordatabase.reader;
 
 import com.example.sensordatabase.controller.SensorController;
-import com.example.sensordatabase.models.Datapoint;
 import com.fazecast.jSerialComm.SerialPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,7 @@ import java.time.Instant;
 public class SerialReader {
 
     private final long sensorId;
-    private final SensorController sensorController; // Reference to the controller
+    private final SensorController sensorController;
     private static final Logger logger = LoggerFactory.getLogger(SerialReader.class);
     private SerialPort comPort;
 
@@ -60,7 +59,7 @@ public class SerialReader {
                                 // Try to convert received data to a Double value
                                 double value = Double.parseDouble(data);
                                 // Only save valid double values to the database
-                                Datapoint datapoint = new Datapoint(value, sensorController.getSensor(sensorId));
+                                sensorController.getSensor(sensorId);
                                 sensorController.addDatapoint(sensorId, value);
                                 lastDataReceivedTime = Instant.now(); // Update last data received time
                             } catch (NumberFormatException ex) {
@@ -93,16 +92,13 @@ public class SerialReader {
             comPort.closePort();
             logger.info("Port closed.");
         }
-
         try {
             Thread.sleep(5000); // Wait for 5 seconds before retrying
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-
         comPort = SerialPort.getCommPort("COM3");
         comPort.setBaudRate(9600);
-
         if (comPort.openPort()) {
             logger.info("Port reopened successfully.");
             lastDataReceivedTime = Instant.now(); // Reset last received time

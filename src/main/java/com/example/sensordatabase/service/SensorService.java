@@ -16,8 +16,10 @@ public class SensorService {
         this.sensorRepository = sensorRepository;
     }
 
-    // This function helps in making sure that datapoints are added correctly from the serialport,
-    // using the SerialReader-class
+    /* Adds a new datapoint to the specified sensor using data from the SerialReader class.
+     Ensures the datapoint is correctly associated with the sensor and saved to the database.
+     The @Transactional annotation ensures that the entire operation is completed successfully
+     or rolled back in case of any failure, maintaining data integrity. */
     @Transactional
     public List<Datapoint> addDatapoint(Long sensorId, Double value) {
         Sensor sensor = sensorRepository.findById(sensorId)

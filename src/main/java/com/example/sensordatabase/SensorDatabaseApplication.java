@@ -15,10 +15,11 @@ import java.io.IOException;
 public class SensorDatabaseApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(SensorDatabaseApplication.class, args);
     }
 
+    /* The ApplicationListener bean is used to set up the SerialReader to start reading data
+    from the serial port once the application is fully started. */
     @Bean
     public ApplicationListener<ApplicationReadyEvent> applicationReadyEventApplicationListener(SensorController sensorController) throws Exception {
         return event -> {
@@ -33,5 +34,4 @@ public class SensorDatabaseApplication {
             }).start();
         };
     }
-
 }

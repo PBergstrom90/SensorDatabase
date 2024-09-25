@@ -26,10 +26,7 @@ public class Sensor {
         this.name = name;
     }
 
-
-
     public void addDatapoint(Datapoint datapoint) {
-
         datapoints.add(datapoint);
     }
 }
