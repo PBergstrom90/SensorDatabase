@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 
-// Lägg till och registrera Chart.js-komponenter
+// Add and register Chart.js components
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -12,7 +12,7 @@ import {
     Title,
     Tooltip,
     Legend,
-    Filler, // Lägg till för att kunna fylla under linjen
+    Filler, // Added to enable filling under the line
 } from 'chart.js';
 
 ChartJS.register(
@@ -30,7 +30,7 @@ const Dashboard = () => {
     const [sensorData, setSensorData] = useState([]);
 
     useEffect(() => {
-        // Hämta data från backend
+        // Fetch data from backend
         axios.get('/api/sensors/1/datapoints')
             .then(response => {
                 const data = response.data;
@@ -41,22 +41,22 @@ const Dashboard = () => {
             });
     }, []);
 
-    // Förbereda data för graf med datum (dag och månad) på x-axeln
+    // Prepare data for the chart with date (day and month) on the x-axis
     const chartData = {
         labels: sensorData.map(dp => {
             const date = new Date(dp.timestamp);
             const formattedDate = date.toLocaleDateString('sv-SE'); // Get local Swedish time.
-            const formattedTime = date.toLocaleTimeString('sv-SE', {hour12: false}); // Get time in 24 hour format.
+            const formattedTime = date.toLocaleTimeString('sv-SE', {hour12: false}); // Get time in 24-hour format.
             return `${formattedDate} ${formattedTime}`; // Combine date and time for the x-axis label
         }),
         datasets: [
             {
                 label: 'Temperature',
-                data: sensorData.map(dp => dp.value), // Värden för y-axel
-                fill: true, // Fyll under linjen
-                backgroundColor: 'rgba(255, 255, 0, 0.2)', // Transparent gul fyllning
-                borderColor: 'yellow', // Gul linje
-                tension: 0.4, // Mjukare kurvor
+                data: sensorData.map(dp => dp.value), // Values for the y-axis
+                fill: true, // Fill under the line
+                backgroundColor: 'rgba(255, 255, 0, 0.2)', // Transparent yellow fill
+                borderColor: 'yellow', // Yellow line
+                tension: 0.4, // Smoother curves
                 borderWidth: 2,
                 pointBackgroundColor: 'yellow',
                 pointBorderColor: '#fff',
@@ -66,14 +66,14 @@ const Dashboard = () => {
         ]
     };
 
-    // Anpassa utseendet på grafen
+    // Customize the appearance of the chart
     const chartOptions = {
         responsive: true,
         plugins: {
             legend: {
-                position: 'top', // Flytta legenden till toppen
+                position: 'top', // Move the legend to the top
                 labels: {
-                    color: 'yellow', // Färg på legendtexten
+                    color: 'yellow', // Color of the legend text
                     font: {
                         size: 14,
                         weight: 'bold',
@@ -82,7 +82,7 @@ const Dashboard = () => {
             },
             tooltip: {
                 enabled: true,
-                backgroundColor: '#333', // Mörk bakgrund för tooltip
+                backgroundColor: '#333', // Dark background for the tooltip
                 titleColor: '#fff',
                 bodyColor: '#fff',
                 borderColor: 'yellow',
@@ -92,10 +92,10 @@ const Dashboard = () => {
         scales: {
             x: {
                 grid: {
-                    display: false, // Döljer rutnät på x-axeln för ett renare utseende
+                    display: false, // Hide grid on the x-axis for a cleaner look
                 },
                 ticks: {
-                    color: 'yellow', // Färg på x-axelns etiketter
+                    color: 'yellow', // Color of the x-axis labels
                     font: {
                         size: 12,
                         weight: 'bold'
@@ -104,15 +104,15 @@ const Dashboard = () => {
             },
             y: {
                 grid: {
-                    color: 'rgba(255, 255, 0, 0.2)', // Färg på rutnätet på y-axeln
+                    color: 'rgba(255, 255, 0, 0.2)', // Color of the grid on the y-axis
                 },
                 ticks: {
-                    color: 'yellow', // Färg på y-axelns etiketter
+                    color: 'yellow', // Color of the y-axis labels
                     font: {
                         size: 12,
                         weight: 'bold'
                     },
-                    beginAtZero: true, // Startar y-axeln vid 0
+                    beginAtZero: true, // Start the y-axis at 0
                 }
             }
         }
@@ -124,7 +124,7 @@ const Dashboard = () => {
             {sensorData.length > 0 ? (
                 <Line data={chartData} options={chartOptions} />
             ) : (
-                <p>Ingen data tillgänglig</p>
+                <p>No data available</p>
             )}
         </div>
     );
